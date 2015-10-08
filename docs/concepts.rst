@@ -94,14 +94,18 @@ from ``BaseHook``, Airflow will choose one connection randomly, allowing
 for some basic load balancing and fault tolerance when used in conjunction
 with retries.
 
-Airflow also has the ability to reference connections via environment
-variables from the operating system. The environment variable needs to be
-prefixed with ``AIRFLOW_CONN_`` to be considered a connection. When
-referencing the connection in the Airflow pipeline, the ``conn_id`` should
-be the name of the variable without the prefix. For example, if the ``conn_id``
-is named ``POSTGRES_MASTER`` the environment variable should be named
-``AIRFLOW_CONN_POSTGRES_MASTER``. Airflow assumes the value returned
-from the environment variable to be in a URI format
+Airflow also has the ability to reference connections via
+environment variables from the operating system. The environment
+variable needs to be prefixed with ``AIRFLOW_CONN_`` to be
+considered a connection. When referencing the connection in the
+Airflow pipeline, the ``conn_id`` should be the name of the
+variable without the prefix. Note that the ``conn_id`` will be
+converted to uppercase before looking up the name of the
+environment.  For example, if the ``conn_id`` is named
+``POSTGRES_MASTER`` (or ``postgres_master``) the environment
+variable should be named ``AIRFLOW_CONN_POSTGRES_MASTER``.
+Airflow assumes the value returned from the environment variable
+to be in a URI format
 (e.g. ``postgres://user:password@localhost:5432/master``).
 
 Queues
